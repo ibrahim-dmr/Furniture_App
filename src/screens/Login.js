@@ -12,7 +12,7 @@ import {
    import React, {useState} from 'react'
    import Loading from '../components/Loading'
   
-  const Login = () => {
+  const Login = ({navigation}) => {
   
     const [name, setName] = useState("") 
     const [lastName, setlastName] = useState("")
@@ -61,6 +61,21 @@ import {
           }, styles.button]  }>
   
           <Text style={styles.buttonText}>Login</Text>
+  
+        </Pressable>
+
+        <Pressable 
+  
+          onPress={() => navigation.navigate('SignUpPage')}
+  
+          style = {  ({pressed}) =>  [{
+  
+            backgroundColor: pressed ? "gray" : "lightgray",
+            marginTop:50,
+
+          }, styles.signupButton]  }>
+  
+          <Text style={styles.buttonText}>Sign Up</Text>
   
         </Pressable>
   
@@ -113,6 +128,13 @@ import {
     welcome:{
       fontWeight:'bold',
       fontSize:26
+    },
+    signupButton:{
+      width:'30%',
+      height:50,
+      borderRadius:10,
+      alignItems:'center',
+      justifyContent:'center',
     }
   
   });
