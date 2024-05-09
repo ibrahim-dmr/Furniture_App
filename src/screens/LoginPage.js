@@ -12,14 +12,13 @@ import {Loading, CustomTextInput, CustomButton} from '../components/';
 const LoginPage = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [result, setResult] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     console.log(isLoading)
 
     return (
         <View style={styles.container}>
-            <Text style={styles.welcome}>Welcome {result}</Text>
+            <Text style={styles.welcome}>Hoş Geldiniz</Text>
 
             <Image
                 source={require('../../assets/images/forlogin.png')}
