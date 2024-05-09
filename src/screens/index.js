@@ -1,14 +1,14 @@
-import Login from "./LoginPage";
-import Signup from "./SignupPage";
-import Home from "./Home";
-import Profile from "./Profile";
+import LoginPage from "./LoginPage";
+import SignupPage from "./SignupPage";
+import HomePage from "./HomePage";
+import ProfilePage from "./ProfilePage";
 
 
 
 
 export {
-    Login,
-    Signup,
-    Home,
-    Profile,
+    LoginPage,
+    SignupPage,
+    HomePage,
+    ProfilePage,
 }

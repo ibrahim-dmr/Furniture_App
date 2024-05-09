@@ -1,6 +1,7 @@
 import React from "react";
-import LoginPage from "../screens/LoginPage"; // Dosya yolu düzeltilmiş
-import SignupPage from "../screens/SignupPage"; // Dosya yolu düzeltilmiş
+// import LoginPage from "../screens/LoginPage"; 
+// import SignupPage from "../screens/SignupPage"; 
+import { LoginPage, SignupPage } from "../screens";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -12,7 +13,7 @@ const AuthStack = () => {
             initialRouteName="Login"
             screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Login" component={LoginPage} />
-            <Stack.Screen name="Signup" component={SignupPage} />
+            <Stack.Screen name="SignUp" component={SignupPage} />
         </Stack.Navigator>
     )
 }
