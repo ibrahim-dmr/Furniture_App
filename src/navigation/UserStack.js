@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from 'react-native';
 import {Home, Profile} from "../screens"
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 

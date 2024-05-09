@@ -1,21 +1,20 @@
 import React from "react";
-import {Login, SignupPage} from "../screens"
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import LoginPage from "../screens/LoginPage"; // Dosya yolu düzeltilmiş
+import SignupPage from "../screens/SignupPage"; // Dosya yolu düzeltilmiş
 
-const Stack  = createNativeStackNavigator();
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
     return (
         <Stack.Navigator
-            initialRouteName="LoginPage"
-            screenOptions={{headerShown:false}}>
-        
-            <Stack.Screen name="LoginPage" component={Login}/>
-            <Stack.Screen name="SignupPage" component={SignupPage}/>
-
-
+            initialRouteName="Login"
+            screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Login" component={LoginPage} />
+            <Stack.Screen name="Signup" component={SignupPage} />
         </Stack.Navigator>
     )
 }
 
-export default AuthStack
+export default AuthStack;

@@ -1,13 +1,14 @@
-import Login from "./Login";
-import SignupPage from "./Signup";
+import Login from "./LoginPage";
+import Signup from "./SignupPage";
 import Home from "./Home";
 import Profile from "./Profile";
 
 
 
+
 export {
     Login,
-    SignupPage,
+    Signup,
     Home,
     Profile,
 }
