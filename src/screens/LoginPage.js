@@ -1,63 +1,52 @@
-import React, { useState } from 'react';
-import { 
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Pressable,
-    Image,
-} from 'react-native';
-import {Loading, CustomTextInput, CustomButton} from '../components/';
+// LoginPage.js
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail, setPassword, setIsLoading } from '../redux/userSlice';
+import { Loading, CustomTextInput, CustomButton } from '../components';
+import { auth, firestore } from '../../config/firebase';
 
 const LoginPage = ({ navigation }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const { email, password, isLoading } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
 
-    console.log(isLoading)
+    const changeIsLoading = () => {
+        dispatch(setIsLoading(false));
+    };
 
     return (
         <View style={styles.container}>
             <Text style={styles.welcome}>Hoş Geldiniz</Text>
-
-            <Image
-                source={require('../../assets/images/forlogin.png')}
-                style={styles.image}
-            />
-
+            <Image source={require('../../assets/images/forlogin.png')} style={styles.image} />
             <CustomTextInput
-              title="Email"
-              isSecureText = {false}
-              handleOnChangeText = {setEmail}
-              handleValue = {email}
-              handlePlaceholder = 'Enter Your Email'
-              />
-            
+                title="Email"
+                isSecureText={false}
+                handleOnChangeText={(text) => dispatch(setEmail(text))}
+                handleValue={email}
+                handlePlaceholder='Enter Your Email'
+            />
             <CustomTextInput
-              title="Password"
-              isSecureText = {true}
-              handleOnChangeText = {setPassword}
-              handleValue = {password}
-              handlePlaceholder = 'Enter Your Password'
-              />
-
-            <CustomButton
-              buttonText = "Login"
-              setWidth = "80%"
-              handleOnPress = {() => setIsLoading(true)}
-              buttonColor = "blue"
-              pressButonColor = "gray"
+                title="Password"
+                isSecureText={true}
+                handleOnChangeText={(text) => dispatch(setPassword(text))}
+                handleValue={password}
+                handlePlaceholder='Enter Your Password'
             />
-
             <CustomButton
-              buttonText = "Sign Up"
-              setWidth = "30%"
-              handleOnPress = {() => navigation.navigate('SignUp')} 
-              buttonColor = "gray"
-              pressButonColor = "lightgray"
+                buttonText="Login"
+                setWidth="80%"
+                handleOnPress={() => dispatch(setIsLoading(true))}
+                buttonColor="blue"
+                pressButonColor="gray"
             />
-
-            {isLoading ? <Loading changeIsLoading={() => setIsLoading(false)} /> : null}
+            <CustomButton
+                buttonText="Sign Up"
+                setWidth="30%"
+                handleOnPress={() => navigation.navigate('SignUp')}
+                buttonColor="gray"
+                pressButonColor="lightgray"
+            />
+            {isLoading && <Loading changeIsLoading={changeIsLoading} />}
         </View>
     );
 }
@@ -69,27 +58,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    inputContainer:{
-      width: '80%',
-
-    },
-    image: {
-        width: "80%",
-        height: "35%",
-        borderRadius: 10,
-        marginBottom: 30,
-      },
     welcome: {
         fontWeight: 'bold',
         fontSize: 30,
         marginBottom: 30,
     },
-    signupButton: {
-        width: '30%',
-        height: 50,
+    image: {
+        width: '80%',
+        height: '35%',
         borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
+        marginBottom: 30,
     },
 });
 
