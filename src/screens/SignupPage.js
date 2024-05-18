@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Image, Pressable, Alert } from "react-native";
 import { CustomTextInput, CustomButton } from "../components";
-import { auth, firestore } from '../../config/firebase';// firebase.js dosyasından içe aktarın
+import { auth, firestore } from '../../config/firebase'; // firebase.js dosyasından içe aktarın
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 const SignupPage = ({ navigation }) => {
@@ -17,9 +17,10 @@ const SignupPage = ({ navigation }) => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: name });
       setIsLoading(false);
+      Alert.alert('Success', 'Account created successfully.');
     } catch (e) {
       setIsLoading(false);
-      alert(e.message);
+      Alert.alert('Error', e.message);
     }
   };
 

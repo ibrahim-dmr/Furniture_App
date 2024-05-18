@@ -1,17 +1,33 @@
-// LoginPage.js
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { setEmail, setPassword, setIsLoading } from '../redux/userSlice';
 import { Loading, CustomTextInput, CustomButton } from '../components';
-import { auth, firestore } from '../../config/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth'; // firebase auth fonksiyonunu ekledik
+import { auth } from '../../config/firebase';
 
 const LoginPage = ({ navigation }) => {
     const { email, password, isLoading } = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
-    const changeIsLoading = () => {
-        dispatch(setIsLoading(false));
+    const handleLogin = async () => {
+        if (!email || !password) {
+            alert('Please enter both email and password.');
+            return;
+        }
+        dispatch(setIsLoading(true));
+        try {
+            // Firebase authentication işlemleri
+            await signInWithEmailAndPassword(auth, email, password); // giriş işlemi
+            // Giriş başarılı olduğunda yapılacak işlemler buraya gelecek
+            // Örneğin:
+            navigation.navigate("UserStack")
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('An error occurred. Please try again.');
+        } finally {
+            dispatch(setIsLoading(false));
+        }
     };
 
     return (
@@ -35,7 +51,7 @@ const LoginPage = ({ navigation }) => {
             <CustomButton
                 buttonText="Login"
                 setWidth="80%"
-                handleOnPress={() => dispatch(setIsLoading(true))}
+                handleOnPress={handleLogin}
                 buttonColor="blue"
                 pressButonColor="gray"
             />
@@ -46,7 +62,7 @@ const LoginPage = ({ navigation }) => {
                 buttonColor="gray"
                 pressButonColor="lightgray"
             />
-            {isLoading && <Loading changeIsLoading={changeIsLoading} />}
+            {isLoading && <Loading />}
         </View>
     );
 }
