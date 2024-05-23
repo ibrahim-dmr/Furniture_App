@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEmail, setPassword, setIsLoading } from '../redux/userSlice';
+import { setEmail, setPassword, setIsLoading, setIsAuth } from '../redux/userSlice';
 import { Loading, CustomTextInput, CustomButton } from '../components';
-import { signInWithEmailAndPassword } from 'firebase/auth'; // firebase auth fonksiyonunu ekledik
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 
 const LoginPage = ({ navigation }) => {
@@ -17,11 +17,9 @@ const LoginPage = ({ navigation }) => {
         }
         dispatch(setIsLoading(true));
         try {
-            // Firebase authentication işlemleri
-            await signInWithEmailAndPassword(auth, email, password); // giriş işlemi
-            // Giriş başarılı olduğunda yapılacak işlemler buraya gelecek
-            // Örneğin:
-            navigation.navigate("UserStack")
+            await signInWithEmailAndPassword(auth, email, password);
+            dispatch(setIsAuth(true)); // Kullanıcının doğrulandıığını belirt
+            navigation.navigate("UserStack");
         } catch (error) {
             console.error('Login error:', error);
             alert('An error occurred. Please try again.');

@@ -1,23 +1,19 @@
 import React from "react";
-import { StyleSheet } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-import AuthStack from "./AuthStack"
+import AuthStack from "./AuthStack";
 import UserStack from "./UserStack";
+import { useSelector } from 'react-redux';
 
-const rootNavigation = () => {
-
-    const isAuth = false
+const RootNavigation = () => {
+    const isAuth = useSelector((state) => state.user.isAuth);
 
     return (
         <NavigationContainer>
             {
-                !isAuth 
-                    ? <AuthStack/> 
-                    : <UserStack/>
+                !isAuth ? <AuthStack /> : <UserStack />
             }
-
         </NavigationContainer>
-    )
+    );
 }
 
-export default rootNavigation
+export default RootNavigation;

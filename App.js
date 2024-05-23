@@ -5,6 +5,7 @@ import { store } from "./src/redux/store";
 import firebase from "firebase/compat/app";
 import 'firebase/auth';
 import "firebase/firestore";
+import categories from "./src/data/categories";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCASWWZF71ub84zmAGbCyrzB2S_vtnTtSI",
