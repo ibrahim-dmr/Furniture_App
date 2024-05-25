@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import categories from '../data/categories';
 
 const HomePage = ({ navigation }) => {
-    useEffect(() => {
-        console.log("Categories data:", categories);
-    }, []);
-
     const renderCategory = ({ item }) => (
         <TouchableOpacity style={styles.categoryContainer} onPress={() => navigation.navigate('CategoryPage', { category: item.name })}>
             <Image source={item.image} style={styles.categoryImage} />
@@ -44,19 +40,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     categoryContainer: {
-        margin: 8,
-        borderRadius: 10,
+        margin: 5,
+        borderRadius: 30,
         backgroundColor: '#fff',
         overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 150,
-        width: '50%', // Yarım ekran genişliği kadar
+        height: 140,
+        width: '47%', // Genişliği yarım ekran genişliği kadar olacak şekilde ayarlandı
     },
     categoryImage: {
-        width: '100%',
+        width: '105%',
         height: 100,
-        resizeMode: 'cover',
+        resizeMode: 'cover', // 'contain' yerine 'cover' kullanıldı
     },
     categoryName: {
         fontSize: 16,

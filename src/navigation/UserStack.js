@@ -16,6 +16,8 @@ const UserStack = () => {
             <Stack.Screen name="HomePage" component={HomePage}/>
             <Stack.Screen name="Profile" component={ProfilePage}/>
             <Stack.Screen name="Details" component={DetailsScreen}/>
+            <Stack.Screen name="CategoryPage" component={CategoryPage}/>
+
 
         </Stack.Navigator>
     )
