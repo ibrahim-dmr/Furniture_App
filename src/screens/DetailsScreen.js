@@ -1,40 +1,35 @@
 import React from 'react';
-import {
-  ImageBackground,
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-
+import { SafeAreaView, View, Text, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import COLORS from '../consts/colors';
+import COLORS from '../consts/colors'; // COLORS'ı import ettiğinizden emin olun
 
-const DetailsScreen = ({navigation, route}) => {
-  const furniture = route.params;
+const DetailsScreen = ({ navigation, route }) => {
+  const furniture = route.params.item;
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
-      {/* Ekranın geri dönüş butonu ve başlık */}
-      <View style={style.header}>
-        <View style={style.headerBtn}>
-          <Icon name="chevron-left" size={25} onPress={navigation.goBack} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+      <View style={styles.header}>
+        <View style={styles.headerBtn}>
+          <Icon name="chevron-left" size={25} onPress={() => navigation.goBack()} />
         </View>
-        <Text style={{fontWeight: 'bold', fontSize: 18}}>Details</Text>
-        <View style={style.headerBtn}>
+        <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Details</Text>
+        <View style={styles.headerBtn}>
           <Icon name="dots-vertical" size={25} color={COLORS.primary} />
         </View>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Detaylar buraya gelecek */}
+        <View style={{ padding: 20 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 10 }}>{furniture.name}</Text>
+          <Text style={{ fontSize: 18, color: COLORS.primary, marginBottom: 10 }}>Price: ${furniture.price}</Text>
+          <Text style={{ fontSize: 16 }}>{furniture.description}</Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     paddingVertical: 20,
     flexDirection: 'row',
