@@ -1,11 +1,12 @@
+// Favorites.js
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useSelector } from 'react-redux';
 
-const Favorites = ({ navigation, route }) => {
-  const { favorites } = route.params;
+const Favorites = ({ navigation }) => {
+  const favorites = useSelector(state => state.favorites.items);
 
   const navigateToDetail = (item) => {
-    // Favori ürünün detay sayfasına git
     navigation.navigate('Details', { item });
   };
 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addFavorite } from '../redux/FavoritesSlice'; // import Redux action
 import categories from '../data/categories';
 
 const CategoryPage = ({ navigation, route }) => {
   const { category } = route.params;
-  const [favorites, setFavorites] = useState([]);
+  const dispatch = useDispatch(); // useDispatch hook
 
   // Kategorinin adına göre ilgili resimleri getir
   const categoryData = categories.find((item) => item.name === category);
@@ -33,7 +35,7 @@ const CategoryPage = ({ navigation, route }) => {
   );
 
   const addToFavorites = (item) => {
-    setFavorites((prevFavorites) => [...prevFavorites, item]);
+    dispatch(addFavorite(item)); // dispatch the addFavorite action
   };
 
   const renderItem = ({ item }) => (
@@ -63,7 +65,7 @@ const CategoryPage = ({ navigation, route }) => {
       />
       <TouchableOpacity
         style={styles.favoritesButton}
-        onPress={() => navigation.navigate('Favorites', { favorites })}
+        onPress={() => navigation.navigate('Favorites')}
       >
         <Text style={styles.favoritesButtonText}>Favoriler</Text>
       </TouchableOpacity>
@@ -131,3 +133,4 @@ const styles = StyleSheet.create({
 });
 
 export default CategoryPage;
+
